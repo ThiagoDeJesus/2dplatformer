@@ -1,5 +1,10 @@
 extends actor
 
+export var stomp_impulse: = 800.0
+
+func _on_enemy_detector_area_entered(area: Area2D) -> void:
+	velocity = calculate_stomp_velocity(velocity, stomp_impulse)
+
 func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and velocity.y < 0.0
 	var direction: = get_direction()
@@ -18,6 +23,12 @@ func calculate_move_velocity(linear_velocity: Vector2, direction: Vector2, speed
 		new_velocity.y = speed.y * direction.y
 	if is_jump_interrupted:
 		new_velocity.y = 0
+	#Ctrl + R para alterar palavras em um script
+	#Ctrl + Shift + F para alterar palavras em todos os arquivos
 	return new_velocity
-#Ctrl + R para alterar palavras em um script
-#Ctrl + Shift + F para alterar palavras em todos os arquivos
+
+func calculate_stomp_velocity(linear_velocity: Vector2, stomp_impulse: float) -> Vector2:
+		var new_velocity: = linear_velocity
+		new_velocity.y = -stomp_impulse
+		return new_velocity
+
