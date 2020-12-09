@@ -3,6 +3,8 @@ extends actor
 export var stomp_impulse: = 800.0
 
 func _on_enemy_detector_area_entered(area: Area2D) -> void:
+	if velocity.y <= 0:
+		return
 	velocity = calculate_stomp_velocity(velocity, stomp_impulse)
 
 func _on_enemy_detector_body_entered(body: Node) -> void:
@@ -13,7 +15,6 @@ func _physics_process(delta: float) -> void:
 	var direction: = get_direction()
 	velocity = calculate_move_velocity(velocity, direction, speed, is_jump_interrupted)
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
-	
 func get_direction() -> Vector2:
 	return Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
 		-1.0 if Input.is_action_just_pressed("jump") and is_on_floor() else 1.0)
