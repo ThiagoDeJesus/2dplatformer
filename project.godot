@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="2dplatformer"
 config/icon="res://icon.png"
 
+[display]
+
+window/stretch/mode="2d"
+
 [input]
 
 move_left={
