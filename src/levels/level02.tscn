@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/tileset.png" type="Texture" id=1]
 [ext_resource path="res://src/actors/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/UserInterface.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/background.png" type="Texture" id=4]
 [ext_resource path="res://src/objects/coin.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/EndScreen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/objects/portal_2d.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 80, 0, 80, 80, 0, 80 )
@@ -32,6 +35,11 @@ points = PoolVector2Array( 0, 0, 80, 0, 80, 80, 0, 80 )
 0/z_index = 0
 
 [node name="level02" type="Node2D"]
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="UserInterface" parent="UserInterface" instance=ExtResource( 3 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -73,5 +81,9 @@ position = Vector2( 314, 213 )
 
 [node name="Camera2D" parent="player" index="2"]
 limit_right = 2120
+
+[node name="portal_2d" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1082.27, 564.39 )
+next_scene = ExtResource( 6 )
 
 [editable path="player"]
